@@ -106,7 +106,7 @@ function App() {
       <button onClick={()=>{chain_id=137;web3.setProvider(provider2)}}>change to matic Network</button>
       <button onClick={()=>{chain_id=56;web3.setProvider(provider)}}>Change to Binance chain</button>
       <button onClick={()=>{getApprovals(address.target.value)}}>Get Approvals</button>
-      <Message>wait 30 seconds,check console</Message>
+      <Message>FatnFluffy unrekt-clone,wait 30 seconds,check console</Message>
       <Container>
       {allApprovals && allApprovals.map((i)=>{
           return <Message>{'TxnHash//'+i[0]+'TokenContract//'+i[1]+'Block//'+i[2]+'SpenderAdress//'+i[3]+'//Amount//'+i[4]}</Message>
