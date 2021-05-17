@@ -1,0 +1,77 @@
+import BigNumber from "bignumber.js";
+
+export const pools = [
+  {
+    id: 'eth',
+    name: 'ETH',  
+    token: 'ETH',
+    tokenDescription: 'ETH',
+    tokenAddress: '',
+    tokenDecimals: 18,
+    mtokenDecimals: 18,
+    depostLimit:0,
+    tokenDescriptionUrl: '',
+    tokenDescriptionUrl2: '',
+    earnedToken: 'WETH',
+    earnedTokenAddress: '0x1ac65c8E53eF20020E9e80e1810fe91f2d95a407',
+    earnContractAddress: '',
+    defaultApy: "39.54",
+    pricePerFullShare: 1,
+    pastPricePerFullShare: 1
+  },
+  {
+    id: 'matic',
+    name: 'WETH',  
+    token: 'WETH',
+    tokenDescription: 'WETH',
+    tokenAddress: '0x1ac65c8E53eF20020E9e80e1810fe91f2d95a407',
+    tokenDecimals: 18,
+    mtokenDecimals: 18,
+    depostLimit:0,
+    tokenDescriptionUrl: '',
+    tokenDescriptionUrl2: '',
+    earnedToken: 'WETH',
+    earnedTokenAddress: '',
+    earnContractAddress: '',
+    defaultApy: "39.54",
+    pricePerFullShare: 1,
+    pastPricePerFullShare: 1
+  },
+  {
+    id: 'magic',
+    name: 'MAGIC',  
+    token: 'MAGIC',
+    tokenDescription: 'MAGIC',
+    tokenAddress: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+    tokenDecimals: 6,
+    mtokenDecimals: 6,
+    depostLimit:0,
+    tokenDescriptionUrl: '',
+    tokenDescriptionUrl2: '',
+    earnedToken: 'USDT',
+    earnedTokenAddress: '0x72Cf258c852Dc485a853370171d46B9D29fD3184',
+    earnContractAddress: '',
+    defaultApy: "39.54",
+    pricePerFullShare: 1,
+    pastPricePerFullShare: 1
+  },{
+    id: 'AXATIC',
+    name: 'AXMATIC',  
+    token: 'AXMATIC',
+    tokenDescription: 'AXMATIC',
+    tokenAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    tokenDecimals: 6,
+    mtokenDecimals: 6,
+    depostLimit:0,
+    tokenDescriptionUrl: '',
+    tokenDescriptionUrl2: '',
+    earnedToken: 'USDC',
+    earnedTokenAddress: '0x23B4dB3a435517fd5f2661a9c5a16f78311201c1',
+    earnContractAddress: '',
+    defaultApy: "39.54",
+    pricePerFullShare: 1,
+    pastPricePerFullShare: 1
+  },
+  
+
+]

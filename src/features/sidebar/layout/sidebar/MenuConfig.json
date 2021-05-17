@@ -1,0 +1,40 @@
+{
+      
+    "menus": [
+  
+      
+
+    {
+      "title": "Zapper",
+      "icon": "fa fa-book",
+      "active": false,
+      "type": "zap",
+      "badge": {
+        "text": "Hot",
+        "class": "badge-primary"
+      }
+    },
+    {
+      "title": "wrap LP",
+      "icon": "fa fa-book",
+      "active": false,
+      "type": "wrap",
+      "badge": {
+        "text": "Hot",
+        "class": "badge-primary"
+      }
+    },
+    {
+      "title": "Vaults",
+      "icon": "fa fa-book",
+      "active": false,
+      "type": "vault",
+      "badge": {
+        "text": "Hot",
+        "class": "badge-primary"
+      }
+    }
+   
+  ]
+
+}
