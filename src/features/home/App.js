@@ -70,35 +70,6 @@ export default function App({ children }) {
 `
 
 
-useEffect(() => {
-  setModal(createWeb3Modal(t));
-}, [setModal, t]);
-
-useEffect(() => {
-  if (web3Modal && (web3Modal.cachedProvider || window.ethereum)) {
-    connectWallet(web3Modal);
-  }
-}, [web3Modal, connectWallet]);
-
-
-useEffect(() => {
-  if (
-    web3 &&
-    address &&
-    !connectWalletPending &&
-    networkId &&
-    Boolean(networkId !== Number(process.env.REACT_APP_NETWORK_ID))
-  ) {
-    networkSetup(process.env.REACT_APP_NETWORK_ID).catch(e => {
-      console.error(e);
-      alert(t('Network-Error'));
-    });
-  }
-}, [web3, address, networkId, connectWalletPending, t]);
-
-
-
-
   return (
     <NetworksProvider className="space-100" >
     <SnackbarProvider>
