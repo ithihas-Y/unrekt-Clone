@@ -1,24 +1,25 @@
 import Web3 from 'web3';
 import _fetch from 'isomorphic-fetch';
-import detectEthereumProvider from '@metamask/detect-provider';
-/** 
+import detectEthereumProvider from 'metamask-extension-provider';
+ 
 const provider = await detectEthereumProvider();
 
 if (provider) {
   // From now on, this should always be true:
-  // provider === window.ethereum
+  provider === window.ethereum
   startApp(provider); // initialize your app
 } else {
   console.log('Please install MetaMask!');
 }
-*/
 
+/** 
 const apiHost = 'https://api.covalenthq.com';
 
 const provider = new Web3.providers.HttpProvider(
     "https://bsc-dataseed.binance.org/"
     //https://rpc-mainnet.maticvigil.com for matic
 );
+*/
 
 
 
@@ -2228,38 +2229,51 @@ const abi = {
     }
 }
 
-let balances =[];
-let transfers=[];
-const address = '0x1da13e21e751136ae8db80e2e249ab0f79b725bb';
 
-_fetch(apiHost+`/v1/56/address/${address}/balances_v2/`).then(
-    response=>response.json()
-).then(async(data)=>{balances.push(data.data.items)}).then(
-    ()=>{
-        for (let index = 1; index < balances[0].length; index++) {
-            const element = balances[0][index].contract_address;
-            _fetch(apiHost+`/v1/56/address/${address}/transfers_v2/?contract-address=${element}`).then(
-                response=>response.json()
-            ).then(data=>{transfers.push(data.data.items)})
-            
+
+const address = '0x0e1bef8548a65512d19a50d5b4c5af3ef1667d47';
+
+export async function  getApprovals(address){
+    let balances =[];
+    let transfers=[];
+    let finalApprovals =[];
+    _fetch(apiHost+`/v1/56/address/${address}/balances_v2/`).then(
+        response=>response.json()
+    ).then((data)=>{balances.push(data.data.items)}).then(
+        async()=>{
+            for (let index = 1; index < balances[0].length; index++) {
+                const i = balances[0][index];
+                if(i.supports_erc !=0){
+                    await _fetch(apiHost+`/v1/56/address/${address}/transfers_v2/?contract-address=${i.contract_address}`).then(
+                        response=>{response.json().then(data=>transfers.push(data.data.items))}
+                    ) 
+                }
+                  
+            }
+    
+            transfers.forEach(element => {
+                element.forEach(i => {
+                    i.transfers.forEach(j => {
+                        const contract = new web3.eth.Contract(abi.abi,j.contract_address);
+                        contract.methods.allowance(address,i.to_address).call().then(
+                            data=>{
+                                if(data !=0){
+                                    console.log([data,j.contract_name,j.contract_address,i.to_address]);
+                                    return[[data,j.contract_name,j.contract_address,i.to_address]];
+                                }    
+                                }
+                        )
+    
+                    });
+                });
+                
+            });
         }
-        for (let index = 1; index < balances.length; index++) {
-            const element = transfers[index].to_address;
-            const contract = new web3.eth.Contract(abi.abi,`${element}`);
-            contract.methods.allowance(address,`${element}`).call().then(
-                data=>console.log(data)
-            )
-            
-        }
-    }
-)
+    )
 
+}
 
-
-
-
-
-
-
-
-
+export function revokeApprovals(contract_address,spender_address,amount){
+    const contract = new web3.eth.Contract(abi.abi,contract_address);
+    contract.methods.decreaseAllowance(spender_address,amount).send({from:web3.eth.accounts[0]});
+}
